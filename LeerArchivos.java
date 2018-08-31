@@ -4,9 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
  *Clase que lee archivos y se queda con las características de cada  
- *representante.
+ *casilla y/o representante.
  *@author: García Landa Valeria
  *------- Rebollar Pérez Ailyn
  *------- Reyer Granados Naomi Itzel
@@ -15,10 +16,43 @@ import java.util.ArrayList;
 
 
 public class LeerArchivos{
-    private ArrayList<Casilla> casillas = new ArrayList<Casilla>();
-     private ArrayList<Representante> representantes = new ArrayList<Representante>();
+    // Lista de casillas de acuerdo a nuestro archivo .csv
+    private ArrayList<Casilla> casillas;
+    // Lista de representantes de acuerdo a nuestro archivo .csv
+    private ArrayList<Representante> representantes;
     
-    public static void muestraContenido(String archivo, int n) throws FileNotFoundException, IOException{
+    /** Define la lista de casillas de nuestro archivo .csv 
+     */
+    public void setCasillas(ArrayList<Casilla> casillas){
+	this.casillas = casillas;
+    }
+    
+    /** Regresa la lista de casillas de nuestro archivo .csv
+     * @return la lista de casillas de nuestro archivo .csv
+     */
+    public ArrayList<Casilla> getCasillas(){
+	return this.casillas;
+    }
+
+     /** Define la lista de representantes preliminares
+      * de nuestro archivo .csv 
+     */
+    public void setRepresentantes(ArrayList<Representante> representantes){
+	this.representantes = representantes;
+    }
+    
+    /** Regresa la lista de representantes de nuestro archivo .csv
+     * @return la lista de representantes de nuestro archivo .csv
+     */
+    public ArrayList<Representante> getRepresentantes(){
+	return this.representantes;
+    }
+    
+    /**
+ * Realiza lectura de archivos .csv y vamos creando de acuerdo al
+ * archivo una lista de representantes o de casillas para el programa. 
+ */
+    public static void muestraContenido(String archivo) throws FileNotFoundException, IOException{
 	String cadena;
 	FileReader f = new FileReader(archivo);
 	BufferedReader b = new BufferedReader(f);
@@ -35,14 +69,20 @@ public class LeerArchivos{
 	b.close();
     }
 
+    /**
+     * Separamos los atributos de cada registro que puede ser
+     * un representante o casilla.
+     */ 
     private String[] separa(String cadena){
 	return cadena.split(",");
     }
+
+    /** Ejecuta el programa
+     */
     public static void main(String[] args) throws IOException{
 	muestraContenido("casilla.csv");
+        
     }
 }
-			 
-
 
 
