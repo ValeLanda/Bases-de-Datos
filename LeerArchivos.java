@@ -19,7 +19,12 @@ public class LeerArchivos{
     // Lista de casillas de acuerdo a nuestro archivo .csv
     private static ArrayList<Casilla> casillas;
     // Lista de representantes de acuerdo a nuestro archivo .csv
-    // private ArrayList<Representante> representantes;
+    private static ArrayList<Representante> representantes;
+    
+    public LeerArchivos(){
+	this.casillas = new ArrayList<Casilla>();
+	this.representantes = new ArrayList<Representante>();
+    }
     
     /** Define la lista de casillas de nuestro archivo .csv 
      */
@@ -33,58 +38,84 @@ public class LeerArchivos{
     public ArrayList<Casilla> getCasillas(){
 	return this.casillas;
     }
-
-     /** Define la lista de representantes preliminares
-      * de nuestro archivo .csv 
+    
+    /** Define la lista de representantes preliminares
+     * de nuestro archivo .csv 
      */
-    // public void setRepresentantes(ArrayList<Representante> representantes){
-    //	this.representantes = representantes;
-    // }
+    public void setRepresentantes(ArrayList<Representante> representantes){
+    	this.representantes = representantes;
+    }
     
     /** Regresa la lista de representantes de nuestro archivo .csv
      * @return la lista de representantes de nuestro archivo .csv
      */
-    //public ArrayList<Representante> getRepresentantes(){
-//	return this.representantes;
-    //}
+    public ArrayList<Representante> getRepresentantes(){
+	return this.representantes;
+    }
     
     /**
- * Realiza lectura de archivos .csv y vamos creando de acuerdo al
- * archivo una lista de representantes o de casillas para el programa. 
- */
-    public static void muestraContenido(String archivo, int n) throws FileNotFoundException, IOException{
+     * Realiza lectura del archivo Casillas.csv y vamos creando de
+     * acuerdo al archivo una lista de casillas para el programa. 
+     */
+    public static void leeArchivoC(String archivo) throws FileNotFoundException, IOException{
 	String cadena;
 	FileReader f = new FileReader(archivo);
 	BufferedReader b = new BufferedReader(f);
 	while((cadena = b.readLine()) != null){
 	    String[] a = separa(cadena);
-	    if(n == 1){
 	    Casilla casilla = new Casilla(a);
 	    casillas.add(casilla);
-	    }else{
-		Representante r = new Representante(a);
-		representantes.add(r);
-	    }
 	}
 	b.close();
     }
+    
+    /**
+     * Realiza lectura del archivo Representantes.csv y vamos
+     * creando una lista de representantes para el programa. 
+     */
+    public static void leeArchivoR(String archivo) throws FileNotFoundException, IOException{
+	String cadena;
+	FileReader f = new FileReader(archivo);
+	BufferedReader b = new BufferedReader(f);
+	while((cadena = b.readLine()) != null){
+	    String[] a = separa(cadena);
+	    int indice = casillas.indexOf(a[4]);
+	    if(indice != -1){
+		Representate r = new Representante(a, casillas.get(indice));
+		casillas.add(casilla);
+	    }else{
+		System.out.println("La casilla a la que se quiere agregar
+                                      el representante no es válida")
+		    }
+	}
+	b.close();
+    }
+    
 
     /**
      * Separamos los atributos de cada registro que puede ser
      * un representante o casilla.
+     * @return un arreglo con los atributos separados.
      */ 
     private static String[] separa(String cadena){
 	return cadena.split(",");
     }
 
+    /**
+     * Buscamos si una casilla existe en nuestras casillas válidas
+     * @return true sí está, false en otro caso.
+     */
+    public static int buscaCasilla(Casilla c){
+	int indice = casillas.indexOf(c);
+	
+    }
+
     /** Ejecuta el programa
      */
     public static void main(String[] args) throws IOException{
-	muestraContenido("casilla.csv" 1);
-	
-	
-	
-        
+	LeerArchivos l = new LeerArchivos();
+        leeArchivoC("casilla.csv");
+      
     }
 }
 

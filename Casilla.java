@@ -24,8 +24,15 @@ public class Casilla{
 	this.estado = arreglo[0];
 	this.distrito = arreglo[1];
 	this.seccion = arreglo[2];
-	this.tipo = arreglo[3];
-	this.aprobado = arreglo[4];
+	if(arreglo[3].equals("B1") ||
+	   arreglo[3].equals("C1") ||
+	   arreglo[3].equals("C2") ||
+	   arreglo[3].equals("C3")){
+	    this.tipo = arreglo[3];
+	}else{System.out.println("Es un tipo de casilla no válido");}
+	if(arreglo[4].equals("S") || arreglo[4].equals("N")){
+	    this.aprobado = arreglo[4];
+	}else{System.out.println("Sólo podemos aceptar casillas aprobado S o N");}
     }
 
     /** Define el estado de una casilla.
@@ -63,7 +70,7 @@ public class Casilla{
     /** Regresa el sección de una casilla.
      * @return el sección de una casilla.
      */
-    public String getSección(){
+    public String getSeccion(){
 	return this.seccion;
     }
     
@@ -92,4 +99,7 @@ public class Casilla{
     public String getAprobado(){
 	return this.aprobado;
     }
+
+    
+
 }
