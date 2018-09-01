@@ -63,8 +63,9 @@ public class LeerArchivos{
 	BufferedReader b = new BufferedReader(f);
 	while((cadena = b.readLine()) != null){
 	    String[] a = separa(cadena);
-	    Casilla casilla = new Casilla(a);
+	    Casilla casilla = new Casilla(a, contador);
 	    casillas.add(casilla);
+	    contador++;
 	}
 	b.close();
     }
