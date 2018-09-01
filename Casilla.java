@@ -17,10 +17,12 @@ public class Casilla{
     private String tipo;
     // Nos dice si está aprobada la casilla o no.
     private String aprobado;
+    // Identificado de una casilla
+    private int id;
 
     /** Constructor de una Casilla
      */
-    public Casilla(String[] arreglo){
+    public Casilla(String[] arreglo, int n){
 	this.estado = arreglo[0];
 	this.distrito = arreglo[1];
 	this.seccion = arreglo[2];
@@ -33,6 +35,7 @@ public class Casilla{
 	if(arreglo[4].equals("S") || arreglo[4].equals("N")){
 	    this.aprobado = arreglo[4];
 	}else{System.out.println("Sólo podemos aceptar casillas aprobado S o N");}
+	this.id = n;
     }
 
     /** Define el estado de una casilla.
@@ -98,6 +101,13 @@ public class Casilla{
      */
     public String getAprobado(){
 	return this.aprobado;
+    }
+
+     /** Regresa el identificador de  una casilla.
+     * @return el identificador  de una casilla.
+     */
+    public int getID(){
+	return this.id;
     }
 
     
