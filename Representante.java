@@ -32,7 +32,7 @@ public class Representante{
 
     /*Constructor de un Representante*/
     public Representante(String[] arreglo, Casilla c){
-	this.curpo = arreglo[0]
+	this.curp = arreglo[0];
 	this.nombre = arreglo[1];
 	this.apellidoP = arreglo[2];
 	this.apellidoM= arreglo[3];

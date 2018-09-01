@@ -61,6 +61,7 @@ public class LeerArchivos{
 	String cadena;
 	FileReader f = new FileReader(archivo);
 	BufferedReader b = new BufferedReader(f);
+	int contador = 0;
 	while((cadena = b.readLine()) != null){
 	    String[] a = separa(cadena);
 	    Casilla casilla = new Casilla(a, contador);
@@ -83,10 +84,10 @@ public class LeerArchivos{
 	    int indice = casillas.indexOf(a[4]);
 	    if(indice != -1){
 		Representante r = new Representante(a, casillas.get(indice));
-		casillas.add(casilla);
+		representantes.add(r);
 	    }else{
-		System.out.println("La casilla a la que se quiere agregar
-                                      el representante no es válida")
+		System.out.println("La casilla a la que se quiere agregar" +
+                                      "el representante no es válida");
 		    }
 	}
 	b.close();
