@@ -81,7 +81,7 @@ public class LeerArchivos{
 	    String[] a = separa(cadena);
 	    int indice = casillas.indexOf(a[4]);
 	    if(indice != -1){
-		Representate r = new Representante(a, casillas.get(indice));
+		Representante r = new Representante(a, casillas.get(indice));
 		casillas.add(casilla);
 	    }else{
 		System.out.println("La casilla a la que se quiere agregar
@@ -99,15 +99,6 @@ public class LeerArchivos{
      */ 
     private static String[] separa(String cadena){
 	return cadena.split(",");
-    }
-
-    /**
-     * Buscamos si una casilla existe en nuestras casillas válidas
-     * @return true sí está, false en otro caso.
-     */
-    public static int buscaCasilla(Casilla c){
-	int indice = casillas.indexOf(c);
-	
     }
 
     /** Ejecuta el programa

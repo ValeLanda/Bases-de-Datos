@@ -27,14 +27,18 @@ public class Representante{
     //Sección de la casilla que fue asignado el representante
     private String seccion;
 
+    //CURP del representante
+    private String curp;
+
     /*Constructor de un Representante*/
     public Representante(String[] arreglo, Casilla c){
-	this.nombre = arreglo[0];
-	this.apellidoP = arreglo[1];
-	this.apellidoM= arreglo[2];
-	if(arreglo[3].equals("Propietario") ||
-	   arreglo[3].equals("Suplente")){
-	    this.calidR = arreglo[3];
+	this.curpo = arreglo[0]
+	this.nombre = arreglo[1];
+	this.apellidoP = arreglo[2];
+	this.apellidoM= arreglo[3];
+	if(arreglo[4].equals("Propietario") ||
+	   arreglo[4].equals("Suplente")){
+	    this.calidR = arreglo[4];
 	}else{
 	    System.out.println("El representante solo puede tener calidad de Propietario o Suplente");}
 	this.casilla = c;
@@ -111,8 +115,8 @@ public class Representante{
 	this.casilla = casilla;
     }
 
-    /** Método que regresa la seccióna de un representante.
-     *@return la sección de un representante
+    /** Método que regresa la sección de un representante.
+     *@return la sección de un representante.
      */
 
     public String getSeccion(){
@@ -123,5 +127,12 @@ public class Representante{
      */
     public void setSeccion(String seccion){
 	this.seccion = seccion;
+    }
+     /** Método que regresa la CURP del representante.
+     *@return la curp de un representante.
+     */
+
+    public String getCURP(){
+	return this.curp;
     }
 }
