@@ -106,6 +106,7 @@ public class LeerArchivos{
     public static void main(String[] args) throws IOException{
 	LeerArchivos l = new LeerArchivos();
         leeArchivoC("casilla.csv");
+	
       
     }
 }
