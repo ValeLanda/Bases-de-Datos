@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.File;
 
 
 /**
@@ -17,10 +20,11 @@ import java.util.ArrayList;
 
 public class LeerArchivos{
     // Lista de casillas de acuerdo a nuestro archivo .csv
-    private static ArrayList<Casilla> casillas;
+    private ArrayList<Casilla> casillas;
     // Lista de representantes de acuerdo a nuestro archivo .csv
-    private static ArrayList<Representante> representantes;
-    
+    private ArrayList<Representante> representantes;
+    int kcasillas;
+    private ArrayList<String> kRepresentantes;
     public LeerArchivos(){
 	this.casillas = new ArrayList<Casilla>();
 	this.representantes = new ArrayList<Representante>();
@@ -52,12 +56,18 @@ public class LeerArchivos{
     public ArrayList<Representante> getRepresentantes(){
 	return this.representantes;
     }
+   /** Regresa la lista de cups de los representantes de nuestro archivo .csv
+     * @return la lista de curps de los representantes de nuestro archivo .csv
+     */
+    public ArrayList<String> getkRepresentantes(){
+	return this.kRepresentantes;
+    }
     
     /**
      * Realiza lectura del archivo Casillas.csv y vamos creando de
      * acuerdo al archivo una lista de casillas para el programa. 
      */
-    public static void leeArchivoC(String archivo) throws FileNotFoundException, IOException{
+    public void leeArchivoC(String archivo) throws FileNotFoundException, IOException{
 	String cadena;
 	FileReader f = new FileReader(archivo);
 	BufferedReader b = new BufferedReader(f);
@@ -75,7 +85,7 @@ public class LeerArchivos{
      * Realiza lectura del archivo Representantes.csv y vamos
      * creando una lista de representantes para el programa. 
      */
-    public static void leeArchivoR(String archivo) throws FileNotFoundException, IOException{
+    public void leeArchivoR(String archivo) throws FileNotFoundException, IOException{
 	String cadena;
 	FileReader f = new FileReader(archivo);
 	BufferedReader b = new BufferedReader(f);
@@ -83,7 +93,8 @@ public class LeerArchivos{
 	    String[] a = separa(cadena);
 	    int indice = casillas.indexOf(a[4]);
 	    if(indice != -1){
-		Representante r = new Representante(a, casillas.get(indice));
+		Representante r = new Representante(a, Integer.parseInt(a[4]));
+		kRepresentantes.add(r.getCURP());
 		representantes.add(r);
 	    }else{
 		System.out.println("La casilla a la que se quiere agregar" +
@@ -95,22 +106,36 @@ public class LeerArchivos{
     
 
     /**
+     * Hace la escritura del archivo representantes.csv
+     */
+    public void escribeArchivo() throws IOException  {       
+        File archivo = new File( "representantes.csv");
+        BufferedWriter bw;
+	bw = new BufferedWriter(new FileWriter(archivo));
+	String[] a = { "CURP", "Ailyn","Rebollar", "Pérez",
+		       "Propietario"};
+	String[] b = { "CURP", "Valeria","Landa", "García",
+		       "Propietario"};
+	Representante r1 = new Representante(a, 1);
+	Representante r2 = new Representante(b, 2);
+	representantes.add(r1);
+	representantes.add(r2);
+	for(Representante r : representantes){
+	     bw.write(r.toString() + "\n");
+	}
+        bw.close();
+
+    }
+    
+    /**
      * Separamos los atributos de cada registro que puede ser
      * un representante o casilla.
      * @return un arreglo con los atributos separados.
      */ 
-    private static String[] separa(String cadena){
+    private String[] separa(String cadena){
 	return cadena.split(",");
     }
 
-    /** Ejecuta el programa
-     */
-    public static void main(String[] args) throws IOException{
-	LeerArchivos l = new LeerArchivos();
-        leeArchivoC("casilla.csv");
-	
-      
-    }
 }
 
 

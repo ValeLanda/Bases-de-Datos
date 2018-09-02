@@ -23,19 +23,21 @@ public class Casilla{
     /** Constructor de una Casilla
      */
     public Casilla(String[] arreglo, int n){
-	this.estado = arreglo[0];
-	this.distrito = arreglo[1];
-	this.seccion = arreglo[2];
-	if(arreglo[3].equals("B1") ||
-	   arreglo[3].equals("C1") ||
-	   arreglo[3].equals("C2") ||
-	   arreglo[3].equals("C3")){
-	    this.tipo = arreglo[3];
-	}else{System.out.println("Es un tipo de casilla no válido");}
-	if(arreglo[4].equals("S") || arreglo[4].equals("N")){
-	    this.aprobado = arreglo[4];
-	}else{System.out.println("Sólo podemos aceptar casillas aprobado S o N");}
-	this.id = n;
+	if(arreglo.length == 5){
+		this.estado = arreglo[0];	
+		this.distrito = arreglo[1];
+		this.seccion = arreglo[2];
+		if(arreglo[3].equals("B1") ||
+		   arreglo[3].equals("C1") ||
+		   arreglo[3].equals("C2") ||
+		   arreglo[3].equals("C3")){
+		    this.tipo = arreglo[3];
+		}else{System.out.println("Es un tipo de casilla no válido");}
+		if(arreglo[4].equals("S") || arreglo[4].equals("N")){
+		    this.aprobado = arreglo[4];
+		}else{System.out.println("Sólo podemos aceptar casillas aprobado S o N");}
+		this.id = n;
+	 }
     }
 
     /** Define el estado de una casilla.
@@ -110,6 +112,8 @@ public class Casilla{
 	return this.id;
     }
 
-    
+    public String toString(){
+	return "Casilla = [estado: "+ estado + ", distrito: "+ distrito + ",seccion:  "+ seccion + ",tipo:  " + tipo +",aprobacion:  "+ aprobado + ",id: "+ id;
+    }    
 
 }
